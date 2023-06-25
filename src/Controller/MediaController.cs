@@ -12,9 +12,9 @@ public class MediaController
         _mediaService = mediaService;
     }
 
-    public IEnumerable<Media> GetAllMedia(int page, int perPage)
+    public IEnumerable<Media> GetAllMedia()
     {
-        return _mediaService.GetAllMedia(page, perPage);
+        return _mediaService.GetAllMedia();
     }
 
     public Media AddMedia(Media media)

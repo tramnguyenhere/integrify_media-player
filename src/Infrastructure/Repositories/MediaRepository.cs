@@ -22,14 +22,15 @@ public class MediaRepository : IMediaRepository
         }
     }
 
-    public IEnumerable<Media> GetAllMedia(int page, int perPage)
+    public IEnumerable<Media> GetAllMedia()
     {
-        return _media.Skip(page * perPage).Take(perPage);
+        return _media;
     }
 
     public Media AddMedia(Media media)
     {
         _media.Add(media);
+        Console.WriteLine("Added succesfully!");
         return media;
     }
 

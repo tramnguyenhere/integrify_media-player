@@ -13,30 +13,32 @@ public class MediaService : IMediaService, ISubject
         _subscribers = new();
     }
 
-    public Media AddMedia(Media Media)
+    public Media AddMedia(Media media)
     {
-        throw new NotImplementedException();
+        _mediaRepository.AddMedia(media);
+        return media;
     }
 
     public bool DeletMediaByTitle(string title)
     {
-        throw new NotImplementedException();
+        _mediaRepository.DeleteMediaByTitle(title);
+        return true;
     }
 
-    public IEnumerable<Media> GetAllMedia(int page, int perPage)
+    public IEnumerable<Media> GetAllMedia()
     {
-        var mediaList = _mediaRepository.GetAllMedia(page, perPage);
+        var mediaList = _mediaRepository.GetAllMedia();
         return mediaList;
     }
 
     public Media GetMediaByTitle(string title)
     {
-        throw new NotImplementedException();
+        return _mediaRepository.GetMediaByTitle(title);
     }
 
     public IEnumerable<Media> SortMediaRepository()
     {
-        throw new NotImplementedException();
+        return _mediaRepository.SortMediaRepository();
     }
 
     public void Notify(string message)
