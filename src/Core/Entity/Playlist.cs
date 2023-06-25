@@ -12,19 +12,4 @@ public class Playlist
         Name = name;
         MediaPlaylist = new List<Media>();
     }
-
-    public void AddToPlaylist(Media media)
-    {
-        MediaPlaylist.Add(media);
-    }
-
-    public void RemoveFromPlaylist(Media media)
-    {
-        MediaPlaylist.Remove(media);
-    }
-
-    public void SortAudioAlphabetically()
-    {
-        MediaPlaylist.Sort();
-    }
 }

@@ -1,39 +1,56 @@
-using Service;
-
 namespace Core;
 
-public class Media : IPlayer
+public abstract class Media : IObservable<Media>
 {
     public int Id { get; }
     public string Title { get; set; }
-    public string Artist { get; set; }
     public int Duration { get; set; }
+    private List<ISubscriber> _subscribers;
+    private List<IObserver<Media>> _observers;
 
-    public Media(int id, string filePath, string title, string artist, int duration)
+    public Media(int id, string title, int duration)
     {
         Id = id;
         Title = title;
-        Artist = artist;
         Duration = duration;
+        _subscribers = new();
+        _observers = new();
     }
 
-    public void Play(string filePath)
+    public abstract void GetMediaType();
+
+    public void Unsubscribe(ISubscriber subscriber)
     {
-        Console.WriteLine("");
+        _subscribers.Remove(subscriber);
     }
 
-    public void Pause(string filePath)
+    public void Notify(string message)
     {
-        Console.WriteLine("");
+        foreach (var subscriber in _subscribers)
+        {
+            subscriber.OnReceive(message);
+        };
     }
 
-    public void Stop(string filePath)
+    public IDisposable Subscribe(IObserver<Media> observer)
     {
-        Console.WriteLine("");
+        _observers.Add(observer);
+        return new Unsubscriber(_observers, observer);
     }
 
-    public void Seek(string filePath, TimeSpan position)
+    public class Unsubscriber : IDisposable
     {
-        Console.WriteLine("");
+        private List<IObserver<Media>> _observers;
+        private IObserver<Media> _observer;
+
+        public Unsubscriber(List<IObserver<Media>> observers, IObserver<Media> observer)
+        {
+            _observers = observers;
+            _observer = observer;
+        }
+        public void Dispose()
+        {
+            _observers.Remove(_observer);
+        }
     }
 }

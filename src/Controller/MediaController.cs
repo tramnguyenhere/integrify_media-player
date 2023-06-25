@@ -12,8 +12,28 @@ public class MediaController
         _mediaService = mediaService;
     }
 
-    public IEnumerable<Media> GetAllAudio(int page, int perPage)
+    public IEnumerable<Media> GetAllMedia(int page, int perPage)
     {
-        return _mediaService.GetAllAudio(page, perPage);
+        return _mediaService.GetAllMedia(page, perPage);
+    }
+
+    public Media AddMedia(Media media)
+    {
+        return _mediaService.AddMedia(media);
+    }
+
+    public bool DeletMediaByTitle(string title)
+    {
+        return _mediaService.DeletMediaByTitle(title);
+    }
+
+    public Media GetMediaByTitle(string title)
+    {
+        return _mediaService.GetMediaByTitle(title);
+    }
+
+    public IEnumerable<Media> SortMediaRepository()
+    {
+        return _mediaService.SortMediaRepository();
     }
 }
